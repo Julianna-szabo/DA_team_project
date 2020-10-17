@@ -1,4 +1,0 @@
-Visit restaurants and collect prices on margheritha pizza and on a optional beverage served in 0.5 l volume. You should visit at least 20 places in inner Budapest and 20 places which delivers pizza to CEU Budapest Campus.
-
-Use any districts in Budapest from the "inner city". Inner city is defined as districts: 5,6,7,8,9, 13(Pest side) , 2, 11 (Buda side). Everything else is outer Budapest.
-With the collected prices, create a dataset with tidy table(s)
