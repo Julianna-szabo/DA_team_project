@@ -82,7 +82,7 @@ dp %>%
 # Null mean(on-site)=mean(delivery)
 # Alternative mean(on-site) not = mean(delivery)
 
-t.test(price_marg,
-       alternative = "two.sided", mu = 0, var.equal = TRUE, 
-)
+price_offline <- dp$price_marg[dp$category=="On-site"]
+price_online <- dp$price_marg[dp$category=="Delivery"]
 
+t.test(price_offline,price_online, alternative = "two.sided")
