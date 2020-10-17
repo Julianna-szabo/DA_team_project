@@ -1,0 +1,42 @@
+id,category,name,website,address,long,lat,rating_google,no_ratings,open,close,no_pizza,price_marg,price_bev,price_del
+id,category,name,website,address,long,lat,rating_google,no_ratings,open,close,no_pizza,price_marg,price_bev,price_del
+1,On-site,Pizza me,http://pizzame.hu/hu,"Budapest, Sas u 10, 1051",47.50086,19.051918,4.1,272,11:00,2:00,13,3920,400,N/A
+2,On-site,Paste culture,https://pasta-culture.business.site/?utm_source=gmb&utm_medium=referral,"Budapest, Okt¢ber 6. u. 19, 1051",47.50208,19.050875,4.4,159,11:00,22:00,26,1290,350,N/A
+3,On-site,Pizza Eataliano,https://pizzaeataliano.hu/,"Budapest, VÇcsey u. 5, 1054",47.505595,19.049049,4.3,909,11:00,0:00,26,2640,1090,N/A
+4,On-site,Pizza and Beer,https://pizzaandbeer.hu/,"Budapest, Ak†cfa u. 51, 1073",47.500967,19.064069,3.8,58,10:30,23:00,16,1790,490,N/A
+5,On-site,Pizza Dellarosso Budapest,https://pizzadellarosso.hu/etlapbudapest,"Budapest, Bajcsy-Zsilinszky £t 41, 1065",47.506181,19.055313,4.8,382,12:00,21:00,30,1790,950,N/A
+6,On-site,Jamie Oliver's Pizzeria Budapest,https://www.jamiespizzeria.hu/pizzak.html,"Budapest, Kir†ly u. 13, 1072",47.498519,19.059333,3.9,2103,11:30,23:30,10,1980,860,N/A
+7,On-site,Ponte Pizza,https://pest.pontepizza.hu/,"Budapest, Nefelejcs u. 14, 1078",47.502528,19.082143,4,66,11:00,22:00,63,1701,280,N/A
+8,On-site,LidÇrc CafÇ & Pizzeria,http://liderccafe.hu/,"Budapest, Podmaniczky u. 57, 1064",47.512192,19.063676,4.5,177,10:00,22:00,55,1990,890,N/A
+9,On-site,Pizza Caffee Donna,https://pizzacaffee.hu/etlap#cat12,"Budapest, R†day u. 54, 1092",47.48215,19.067003,4.7,18,11:00,22:00,27,2590,500,N/A
+10,On-site,Den Haag,https://www.denhaagpizza.hu/,"Budapest, Doh†ny u. 5b, 1074",47.495787,19.061725,4.3,267,10:00,22:00,18,1200,400,N/A
+11,On-site,"Capri Pizzeria, Buda",https://pizzacapri.hu/buda/,"Budapest, Csat†rka utca 54, 1025",47.530749,19.010414,4.5,721,12:00,23:00,58,1850,650,N/A
+12,On-site,IGEN,https://www.facebook.com/igenitalia/,"Budapest, Margit kîr£t 60, 1027",47.510891,19.030022,4.4,1620,12:00,22:00,18,2290,790,N/A
+13,On-site,Marxim,http://marxim.hu/,"Budapest, Kis R¢kus u. 23, 1024",47.5122,19.026207,4.4,639,12:00,1:00,32,1790,690,N/A
+14,On-site,Tommy di Napoli,https://www.tommydinapoli.hu/,"Budapest, ?rp†d Fejedelem £tja 8, 1023",47.52104,19.037537,4.5,415,12:00,22:00,23,2490,950,N/A
+15,On-site,Riso Ristorante & Terrace,https://riso.hu/,"Budapest, Lovas £t 41, 1012",47.5064,19.028874,4.7,1083,11:30,22:30,10,1990,890,N/A
+16,On-site,Porcellino Grasso Ristorante,http://www.porcellino.hu/,"Budapest, Ady Endre u. 19, 1024",47.516171,19.027066,4.6,1288,12:00,23:00,23,2290,790,N/A
+17,On-site,Trattoria Da Lello,http://www.dalello.hu/hu/trattoria-da-lello/,"Budapest, Alkot†s u. 53, 1123",47.491528,19.023837,4.2,96,11:00,22:00,35,1890,550,N/A
+18,On-site,Dag†ly 17 Pizza,https://www.facebook.com/dagaly17,"Budapest, Dag†ly u. 17, 1138",47.539234,19.062224,4.6,160,11:30,20:00,21,1600,600,N/A
+19,On-site,Raffaello Ristorante E Pizzeria,https://www.raffaelloetterem.hu/,"Budapest, Karolina £t 72, 1113",47.48038,19.034098,4.3,1168,12:00,23:00,21,1720,980,N/A
+20,On-site,Marcello Ristorante e Pizzeria,https://www.marcelloetterem.hu/en/,"Budapest, Bart¢k BÇla £t 40, 1111",47.480603,19.050819,4.2,613,11:30,22:00,18,1850,800,N/A
+21,Delivery,Pizza Me Doh†ny utca,https://www.netpincer.hu/restaurant/e2mi/pizza-me-dohany-utca#restaurant-info,"Budapest, ErzsÇbet krt. 14, 1073",47.498985,19.069578,2.3,3,11:00,22:55,13,2290,500,490
+22,Delivery,Dolce Vita Pizza,https://www.netpincer.hu/restaurant/l1ed/dolce-vita-pizza#restaurant-info,"Budapest, Erkel u. 9, 1092",47.486865,19.062167,4.6,110,10:30,21:30,17,2150,530,0
+23,Delivery,Grand Re Pizza Hungary,https://www.netpincer.hu/restaurant/f4mw/grand-re-pizza-hungary#restaurant-info,"Budapest, Kir†ly u. 51, 1077",47.501993,19.062956,3.7,77,10:00,22:55,25,1890,400,490
+24,Delivery,LIBERTA Pizzaˇ,https://www.netpincer.hu/restaurant/j9cf/liberta-pizza-38-fele-feltet-felar-nelkul#restaurant-info,"Budapest, WesselÇnyi u. 2, 1077",47.496098,19.059665,4.4,51,11:00,21:25,15,2490,590,0
+25,Delivery,Il Terzo Cerchio êtterem PizzÇria,https://www.netpincer.hu/restaurant/u4uz/il-terzo-cerchio-etterem-pizzeria#restaurant-info,"Budapest, Doh†ny u. 40, 1074",47.496674,19.066486,4.5,2525,11:00,23:59,18,2150,590,500
+26,Delivery,Bettolino Pizza & Pasta - Haller utca,https://www.netpincer.hu/restaurant/s4hs/bettolino-pizza-and-pasta-haller-utca#restaurant-info,"Budapest, Haller u. 24, 1096",47.475882,19.074136,4.6,306,10:00,14:45,14,1990,400,490
+27,Delivery,Avanti PizzÇria - Lajos utca,https://www.netpincer.hu/restaurant/o8wz/avanti-pizzeria-lajos-utca,"Budapest, Lajos u. 98, 1036",47.53308,19.040725,3,134,10:00,21:55,21,1690,490,499
+28,Delivery,Ibolya Pizza,https://www.netpincer.hu/restaurant/q6rg/ibolya-pizza#restaurant-info,"Budapest, Ferenciek tere 5, 1053",47.492322,19.056438,4.3,1204,10:30,22:50,14,1490,400,490
+29,Delivery,Princess Bakery & Bistro,https://www.netpincer.hu/restaurant/e1zv/princess-bakeryandbistro-kossuth-lajos-ter#restaurant-info,"Budapest, Kossuth Lajos tÇr, 1055",47.505646,19.046744,2.8,4,8:00,20:25,7,2190,420,490
+30,Delivery,Cafe de Paris Pizza & More,https://www.netpincer.hu/restaurant/v4sc/cafe-de-paris-pizza-and-more#restaurant-info,"Budapest, Vîrîsmarty tÇr 1, 1051",47.49667,19.05005,2.6,359,11:00,21:00,9,890,490,490
+31,Delivery,Tr¢fea Grill êtterem Zugl¢,https://www.netpincer.hu/restaurant/n8im/trofea-grill-etterem-zuglo#restaurant-info,"Budapest, ErzsÇbet kir†lynÇ £tja 5, 1145",47.517517,19.093975,4.6,4062,10:00,21:25,20,1440,350,300
+32,Delivery,Pizza Monkey Budapest,https://www.netpincer.hu/restaurant/u7om/pizza-monkey-budapest#restaurant-info,"Budapest, K†rm†n u. 3, 1067",47.509103,19.05924,2.5,84,10:30,21:50,46,1880,390,490
+33,Delivery,Pizza Fabbrica,https://www.netpincer.hu/restaurant/l9zd/pizza-fabbrica#restaurant-info,"Budapest, Sas u 8, 1051",47.50054,19.051976,3.9,549,11:00,22:00,17,1690,390,290
+34,Delivery,Don Pepe - K†lm†n Imre utca,https://www.netpincer.hu/restaurant/l5dq/don-pepe-kalman-imre-utca#restaurant-info,"Budapest, K†lm†n Imre u. 23, 1054",47.506933,19.05395,3,150,10:30,22:30,32,1990,450,0
+35,Delivery,Vapiano Belv†ros,https://www.netpincer.hu/restaurant/w3xl/vapiano-belvaros#restaurant-info,"Budapest, Vîrîsmarty tÇr 3, 1051",47.496736,19.051173,4.2,4410,11:00,21:45,22,1590,400,490
+36,Delivery,Trattoria Za-Za,https://www.netpincer.hu/restaurant/y2yr/trattoria-za-za#restaurant-info,"Budapest, R†day u. 16, 1092",47.487863,19.063058,3.4,440,12:00,21:45,12,1290,450,0
+37,Delivery,Il Classico Nyugati tÇr,https://www.netpincer.hu/restaurant/y0dw/il-classico-nyugati-ter#restaurant-info,"Budapest, Nyugati tÇr 6, 1055",47.51067,19.054735,3.6,692,10:30,21:55,17,2240,650,490
+38,Delivery,Drum Cafe Langos & Gulyas,https://wolt.com/hu/hun/budapest/restaurant/drum-cafe,"Budapest, Dob u. 2, 1072",47.496515,19.059092,4.2,6388,9:00,22:00,6,1490,350,499
+39,Delivery,PASTA Culture,https://wolt.com/hu/hun/budapest/restaurant/pasta-culture ,"Budapest, Okt¢ber 6. u. 19, 1051",47.502025,19.050879,4.4,159,11:00,22:00,26,1290,350,499
+40,Delivery,Bazsalikom KÇzm?ves Pizza,https://wolt.com/hu/hun/budapest/restaurant/bazsalikom-kezmuves-pizza,"Budapest, BÇcsi £t 65, 1036",47.529946,19.038345,5,5,11:00,22:00,14,1890,450,899
