@@ -13,6 +13,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(geosphere)
 library(moments)
+library(dplyr)
+dp <- dp
+dp_summary_stats_pizza <- dp_summary_stats_pizza
+dp_summary_stats_bev <- dp_summary_stats_bev
 ```
 
 # Data collection
@@ -20,14 +24,30 @@ library(moments)
 
 # Calculations for opening hours and distance from CEU
 
-```{r dp}
-summary(dp)
+```{r, eval=FALSE}
+ceu = c(47.501348, 19.049375)
+dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
+distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
+
+dp["open_hours"] = get_hours(dp$open,dp$close)
+
+get_interval <- function(open,close){
+  intv = close-open
+  if (intv < 0) {
+    intv = as.difftime("24:00:00")-open+close
+  }
+  intv=as.numeric(as.difftime(intv,units = "hours"))/60
+  print(intv)
+  return(intv)
+}
+
+dp$open_mins=mapply(get_interval, dp$open, dp$close)
 ```
 
 # Descriptive Statistics
 
-```{r pressure, echo=FALSE}
-summarise(dp,
+```{r }
+dp_summary_stats_pizza <- summarise(dp,
           n= n(),
           mean = mean(x = price_marg),
           median = median(x = price_marg),
@@ -35,8 +55,7 @@ summarise(dp,
           max = max(price_marg),
           sd = sd(price_marg),
           skew = skewness(price_marg))
-
-summarise(dp,
+dp_summary_stats_bev <- summarise(dp,
           n= n(),
           mean = mean(x = price_bev),
           median = median(x = price_bev),
@@ -44,12 +63,14 @@ summarise(dp,
           max = max(price_bev),
           sd = sd(price_bev),
           skew = skewness(price_bev))
+
+table_summary <- dp_summary_stats_pizza %>% add_row(dp_summary_stats_bev)
 ```
 
 # Distributions
 ## Price of pizza margarite and beverage
 
-```{r pressure, echo=FALSE}
+```{r, echo=FALSE}
 dp %>% 
   ggplot(aes(x=price_marg))+
   geom_histogram(binwidth = 200, fill= "coral2", col= "black")+
@@ -65,7 +86,7 @@ dp %>%
 
 ## Price of pizza margarite and beverage
 
-```{r pressure, echo=FALSE}
+```{r, echo=FALSE}
 dp %>% 
   ggplot(aes(x=price_bev))+
   geom_histogram(binwidth = 50, fill= "light blue", col= "black")+
@@ -75,7 +96,7 @@ dp %>%
 
 ## Price distribution on-site vs delivery
 
-```{r pressure, echo=FALSE}
+```{r, echo=FALSE}
 dp %>%
   filter(category == "On-site") %>% 
   ggplot(aes(x=price_marg))+
@@ -94,7 +115,7 @@ dp %>%
 
 ## Price distribution on-site vs delivery
 
-```{r pressure, echo=FALSE}
+```{r, echo=FALSE}
 dp %>%
   filter(category == "Delivery") %>% 
   ggplot(aes(x=price_marg))+
@@ -105,9 +126,15 @@ dp %>%
 ```
 
 # T-test
+## Hypothesis
+Null mean(on-site)=mean(delivery)
+Alternative mean(on-site) not = mean(delivery)
 
-```
+```{r, echo=FALSE}
+price_offline <- dp$price_marg[dp$category=="On-site"]
+price_online <- dp$price_marg[dp$category=="Delivery"]
 
+t.test(price_offline,price_online, alternative = "two.sided")
 ```
 
 # Summary and Conclusion

@@ -28,7 +28,7 @@ dp$open_mins=mapply(get_interval, dp$open, dp$close)
 
 
 ## data Analysis
-summarise(dp,
+dp_summary_stats_pizza <- summarise(dp,
           n= n(),
           mean = mean(x = price_marg),
           median = median(x = price_marg),
@@ -36,8 +36,7 @@ summarise(dp,
           max = max(price_marg),
           sd = sd(price_marg),
           skew = skewness(price_marg))
-
-summarise(dp,
+dp_summary_stats_bev <- summarise(dp,
           n= n(),
           mean = mean(x = price_bev),
           median = median(x = price_bev),
@@ -45,7 +44,6 @@ summarise(dp,
           max = max(price_bev),
           sd = sd(price_bev),
           skew = skewness(price_bev))
-
 
 ## Data Visulization Part 1
 dp %>% 
