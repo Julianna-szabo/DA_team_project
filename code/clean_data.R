@@ -60,19 +60,13 @@ dp %>%
 
 
 ## Data Visualization Part 2 - to be worked on
-dp %>%
-  filter(category == "On-site") %>% 
-  ggplot(aes(x=price_marg))+
-  geom_histogram(binwidth = 200, fill= "peachpuff2", col= "black")+
-  theme_bw()+
-  labs(x = 'Price of Margarita Pizza', y= 'Number of Pizzas', title = "Distribution of Price for On-site")
+## Creating a factor variable
+dp$category_f <- factor(dp$category)
 
-dp %>%
-  filter(category == "Delivery") %>% 
-  ggplot(aes(x=price_marg))+
-  geom_histogram(binwidth = 200, fill= "plum2", col= "black")+
-  theme_bw()+
-  labs(x = 'Price of Margarita Pizza', y= 'Number of Pizzas', title = "Distribution of Price for Delivery")
+ggplot(data = dp, aes(x = price_marg, fill = category_f))+
+  geom_histogram(binwidth = 200, col = "black")+
+  labs(x='Price of Margarita Pizza', y='Number of Pizzas', title = "Distribution of Price for On-site", fill= 'category')+
+  facet_wrap(~category_f)
 
 #T -test
 
