@@ -1,10 +1,8 @@
 ---
 title: "Report"
-author: "Dominik Gulacsy"
-date: "17/10/2020"
-output:
-  html_document:
-    df_print: paged
+author: "Group B"
+date: "21/10/2020"
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -21,15 +19,17 @@ library(dplyr)
 #setwd("C:/Users/Dominik/OneDrive - Central European University/1st_trimester/DA1/DA_team_project")
 #esource="C:/Users/Dominik/OneDrive - Central European University/1st_trimester/DA1/DA_team_project"
 # Import via URL
-dp = read_csv('data/raw/dp.csv')
+my_url <- "https://raw.githubusercontent.com/Julianna-szabo/DA_team_project/master/data/raw/dp.csv"
+dp <- read_csv(my_url)
 ```
 
 # Data collection
 
+The data collection process as more difficult than expected. There were many restaurants that we had to eliminate because they did not have a 0.5L beverage or a margarita pizza. For the beverage we always tried to pick Coca Cola or Pepsi when available or otherwise water. If those were not available, we took lemonade even though it is usually more expensive. For the extra measures we recorded, numbers of pizzas they offered, opening hours (which we converted into minutes opened in this analysis), as well as rating on Google and the number of ratings they recieved. The number is important since it gives the rating more credibility. We also recorded the longitude and latitude to calculate the distance from CEU and give students another variable if they want to pick one of these places for lunch or dinner.
 
 # Calculations for opening hours and distance from CEU
 
-```{r, echo=FALSE eval=TRUE}
+```{r, echo=FALSE, eval=TRUE}
 ceu = c(47.501348, 19.049375)
 dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
 distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
@@ -48,8 +48,7 @@ dp$open_mins=mapply(get_interval, dp$open, dp$close)
 
 # Descriptive Statistics
 
-```{r, eval=TRUE}
-library(dplyr)
+```{r, eval=TRUE, echo=FALSE}
 dp_summary_stats_pizza <- summarise(dp,
           n= n(),
           mean = mean(x = price_marg),
@@ -68,12 +67,13 @@ dp_summary_stats_bev <- summarise(dp,
           skew = skewness(price_bev))
 
 table_summary <- dp_summary_stats_pizza %>% add_row(dp_summary_stats_bev)
+table_summary
 ```
 
 # Distributions
 ## Price of pizza margarite and beverage
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, figures-side, fig.show="hold", out.width="50%"}
 dp %>% 
   ggplot(aes(x=price_marg))+
   geom_histogram(binwidth = 200, fill= "coral2", col= "black")+
@@ -89,7 +89,7 @@ dp %>%
 
 ## Price distribution on-site vs delivery
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width="70%"}
 dp$category_f <- factor(dp$category)
 
 ggplot(data = dp, aes(x = price_marg, fill = category_f))+
@@ -111,3 +111,5 @@ t.test(price_offline,price_online, alternative = "two.sided")
 ```
 
 # Summary and Conclusion
+
+Overall the distribution of price of the beverages has a larger range than the prices of the pizza. And overall the prices of the pizzas on-site were more expensive then the ones for delivery, although with the delivery fee this may be evened out. The t-test also comes to the same conclusion where 

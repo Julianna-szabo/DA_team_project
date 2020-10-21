@@ -6,8 +6,10 @@ rm(list=ls())
 library(tidyverse)
 library(geosphere)
 library(moments)
+library(dplyr)
 
-dp <- read_csv("data/raw/dp.csv")
+my_url <- "https://raw.githubusercontent.com/Julianna-szabo/DA_team_project/master/data/raw/dp.csv"
+dp <- read_csv(my_url)
 ceu = c(47.501348, 19.049375)
 dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
 distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
