@@ -14,6 +14,7 @@ library(tidyverse)
 library(geosphere)
 library(moments)
 library(dplyr)
+library(knitr)
 ## Github Repo of Assignment: https://github.com/Julianna-szabo/DA_team_project
 # Import data using paths
 #setwd("C:/Users/Dominik/OneDrive - Central European University/1st_trimester/DA1/DA_team_project")
@@ -48,7 +49,7 @@ dp$open_mins=mapply(get_interval, dp$open, dp$close)
 
 # Descriptive Statistics
 
-```{r, eval=TRUE, echo=FALSE}
+```{r, eval=TRUE, echo=FALSE, results='asis'}
 dp_summary_stats_pizza <- summarise(dp,
           n= n(),
           mean = mean(x = price_marg),
@@ -67,7 +68,7 @@ dp_summary_stats_bev <- summarise(dp,
           skew = skewness(price_bev))
 
 table_summary <- dp_summary_stats_pizza %>% add_row(dp_summary_stats_bev)
-table_summary
+kable(table_summary)
 ```
 
 # Distributions
