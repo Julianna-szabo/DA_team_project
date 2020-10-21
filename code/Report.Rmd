@@ -2,21 +2,26 @@
 title: "Report"
 author: "Dominik Gulacsy"
 date: "17/10/2020"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, include=F, message=FALSE, echo=FALSE, eval=FALSE}
+```{r, include=F, message=FALSE, echo=FALSE, eval=TRUE}
 library(tidyverse)
 library(geosphere)
 library(moments)
 library(dplyr)
-dp <- dp
-dp_summary_stats_pizza <- dp_summary_stats_pizza
-dp_summary_stats_bev <- dp_summary_stats_bev
+## Github Repo of Assignment: https://github.com/Julianna-szabo/DA_team_project
+# Import data using paths
+#setwd("C:/Users/Dominik/OneDrive - Central European University/1st_trimester/DA1/DA_team_project")
+#esource="C:/Users/Dominik/OneDrive - Central European University/1st_trimester/DA1/DA_team_project"
+# Import via URL
+dp = read_csv('data/raw/dp.csv')
 ```
 
 # Data collection
@@ -24,12 +29,10 @@ dp_summary_stats_bev <- dp_summary_stats_bev
 
 # Calculations for opening hours and distance from CEU
 
-```{r, eval=FALSE}
+```{r, echo=FALSE eval=TRUE}
 ceu = c(47.501348, 19.049375)
 dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
 distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
-
-dp["open_hours"] = get_hours(dp$open,dp$close)
 
 get_interval <- function(open,close){
   intv = close-open
@@ -37,7 +40,6 @@ get_interval <- function(open,close){
     intv = as.difftime("24:00:00")-open+close
   }
   intv=as.numeric(as.difftime(intv,units = "hours"))/60
-  print(intv)
   return(intv)
 }
 
@@ -46,7 +48,8 @@ dp$open_mins=mapply(get_interval, dp$open, dp$close)
 
 # Descriptive Statistics
 
-```{r }
+```{r, eval=TRUE}
+library(dplyr)
 dp_summary_stats_pizza <- summarise(dp,
           n= n(),
           mean = mean(x = price_marg),

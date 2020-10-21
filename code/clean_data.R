@@ -12,7 +12,7 @@ ceu = c(47.501348, 19.049375)
 dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
 distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
 
-dp["open_hours"] = get_hours(dp$open,dp$close)
+dp["open_hours"] = get_interval(dp$open,dp$close)
 
 get_interval <- function(open,close){
   intv = close-open
