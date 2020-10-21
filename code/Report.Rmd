@@ -25,11 +25,11 @@ dp <- read_csv(my_url)
 
 # Data collection
 
-The data collection process as more difficult than expected. There were many restaurants that we had to eliminate because they did not have a 0.5L beverage or a margarita pizza. For the beverage we always tried to pick Coca Cola or Pepsi when available or otherwise water. If those were not available, we took lemonade even though it is usually more expensive. For the extra measures we recorded, numbers of pizzas they offered, opening hours (which we converted into minutes opened in this analysis), as well as rating on Google and the number of ratings they recieved. The number is important since it gives the rating more credibility. We also recorded the longitude and latitude to calculate the distance from CEU and give students another variable if they want to pick one of these places for lunch or dinner.
+The data collection process was more difficult than expected. There were many restaurants that we had to exlude because they did not have a 0.5L beverage or a margarita pizza. For the beverage we always tried to pick Coca Cola or Pepsi when available or otherwise water. If those were not available, we took lemonade even though it is usually more expensive. For the extra measures we recorded, numbers of pizzas they offered, opening hours (which we converted into minutes opened in this analysis), as well as rating on Google and the number of ratings they received. The number of ratings is important since it gives the rating more credibility. We also recorded the longitude and latitude to calculate the distance from CEU and give students another variable if they want to pick one of these places for lunch or dinner.
 
 # Calculations for opening hours and distance from CEU
 
-```{r, echo=FALSE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE, include=FALSE}
 ceu = c(47.501348, 19.049375)
 dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
 distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
