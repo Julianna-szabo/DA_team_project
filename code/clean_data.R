@@ -10,26 +10,27 @@ library(dplyr)
 
 my_url <- "https://raw.githubusercontent.com/Julianna-szabo/DA_team_project/master/data/raw/dp.csv"
 dp <- read_csv(my_url)
+
+## Calculate distance from CEU campus
 ceu = c(47.501348, 19.049375)
 dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
 distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
 
-dp["open_hours"] = get_interval(dp$open,dp$close)
 
+## Calculate usual number of hours open
 get_interval <- function(open,close){
   intv = close-open
   if (intv < 0) {
     intv = as.difftime("24:00:00")-open+close
   }
   intv=as.numeric(as.difftime(intv,units = "hours"))/60
-  print(intv)
   return(intv)
 }
 
 dp$open_mins=mapply(get_interval, dp$open, dp$close)
 
 
-## data Analysis
+## Data Analysis
 dp_summary_stats_pizza <- summarise(dp,
           n= n(),
           mean = mean(x = price_marg),
