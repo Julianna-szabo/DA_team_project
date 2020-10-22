@@ -53,23 +53,34 @@ dp %>%
   ggplot(aes(x=price_marg))+
   geom_histogram(binwidth = 200, fill= "coral2", col= "black")+
   theme_bw()+
-  labs(x = 'Price of Margarita Pizza', y= 'Number of Pizzas', title = "Distribution of Price for Pizza")
+  labs(x = 'Price of Margarita Pizza (HUF)', y= 'Number of Pizzas', title = "Distribution of Price for Pizza")
 
 dp %>% 
   ggplot(aes(x=price_bev))+
   geom_histogram(binwidth = 50, fill= "light blue", col= "black")+
   theme_bw()+
-  labs(x = 'Price of 0.5L beverage', y= 'Number of Pizzas', title = "Distribution of Price for Beverage")
+  labs(x = 'Price of 0.5L beverage (HUF)', y= 'Number of Pizzas', title = "Distribution of Price for Beverage")
 
+####### Proposition of Distribution with the categories
+dp %>% 
+  ggplot(aes(x=price_bev, fill=category_bev))+
+  geom_histogram(binwidth = 50, col= "black")+
+  theme_bw()+
+  scale_fill_brewer()+
+  labs(x = 'Price of 0.5L beverage (HUF)', y= 'Number of Pizzas', title = "Distribution of Price for Beverage by category")
 
-## Data Visualization Part 2 - to be worked on
+## Data Visualization Part 2
 ## Creating a factor variable
 dp$category_f <- factor(dp$category)
 
 ggplot(data = dp, aes(x = price_marg, fill = category_f))+
-  geom_histogram(binwidth = 200, col = "black")+
+  geom_histogram(binwidth =  = 200, col = "black")+
   labs(x='Price of Margarita Pizza', y='Number of Pizzas', title = "Distribution of Price for On-site", fill= 'category')+
   facet_wrap(~category_f)
+
+ggplot(data = dp, aes(x = price_marg, fill = category, alpha = 0.2))+
+  geom_density(binwidth = 200, col = "black")+
+  labs(x='Price of Margarita Pizza (HUF)', y='Number of Pizzas', title = "Distribution of Price for On-site and Delivery", fill= 'category')
 
 #T -test
 

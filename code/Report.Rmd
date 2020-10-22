@@ -1,7 +1,5 @@
 ---
 title: "Report"
-author: "Group B"
-date: "21/10/2020"
 output: pdf_document
 ---
 
@@ -23,14 +21,16 @@ library(knitr)
 my_url <- "https://raw.githubusercontent.com/Julianna-szabo/DA_team_project/master/data/raw/dp.csv"
 dp <- read_csv(my_url)
 ```
+author: "Group B"
+date: "21/10/2020"
 
 # Data collection
 
-The data collection process was more difficult than expected. There were many restaurants that we had to exlude because they did not have a 0.5L beverage or a margarita pizza. For the beverage we always tried to pick Coca Cola or Pepsi when available or otherwise water. If those were not available, we took lemonade even though it is usually more expensive. For the extra measures we recorded, numbers of pizzas they offered, opening hours (which we converted into minutes opened in this analysis), as well as rating on Google and the number of ratings they received. The number of ratings is important since it gives the rating more credibility. We also recorded the longitude and latitude to calculate the distance from CEU and give students another variable if they want to pick one of these places for lunch or dinner.
+The data collection process was more difficult than expected. Most of the time coca cola in 0,5l was not available, instead of putting a NA we choose an alternative in 0,5l, pepsi or limonade. If those were not available, we took water or beer even though beer is usually more expensive. We decided to sort them in three categories : soft( Coca, Pepsi, Lemonade), water and beer. For the extra measures we recorded, numbers of pizzas they offered, opening hours (which we converted into minutes opened in this analysis and took the usual opening hours), as well as rating on Google and the number of ratings they received. The number of ratings is important since it gives the rating more credibility. We also recorded the longitude and latitude to calculate the distance from CEU and estimate the fairness of the delivery compare to the distance to CEU.
 
-# Calculations for opening hours and distance from CEU
 
 ```{r, echo=FALSE, eval=TRUE, include=FALSE}
+# Calculations for opening hours and distance from CEU
 ceu = c(47.501348, 19.049375)
 dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
 distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
@@ -79,13 +79,14 @@ dp %>%
   ggplot(aes(x=price_marg))+
   geom_histogram(binwidth = 200, fill= "coral2", col= "black")+
   theme_bw()+
-  labs(x = 'Price of Margarita Pizza', y= 'Number of Pizzas', title = "Distribution of Price for Pizza")
+  labs(x = 'Price of Margarita Pizza (HUF)', y= 'Number of Pizzas', title = "Distribution of Price for Pizza")
 
 dp %>% 
-  ggplot(aes(x=price_bev))+
-  geom_histogram(binwidth = 50, fill= "light blue", col= "black")+
+  ggplot(aes(x=price_bev, fill=category_bev))+
+  geom_histogram(binwidth = 50, col= "black")+
   theme_bw()+
-  labs(x = 'Price of 0.5L beverage', y= 'Number of Pizzas', title = "Distribution of Price for Beverage")
+  scale_fill_brewer()+
+  labs(x = 'Price of 0.5L beverage (HUF)', y= 'Number of Pizzas', title = "Distribution of Price for Beverage by category")
 ```
 
 ## Price distribution on-site vs delivery
@@ -93,11 +94,12 @@ dp %>%
 ```{r, echo=FALSE, out.width="70%"}
 dp$category_f <- factor(dp$category)
 
-ggplot(data = dp, aes(x = price_marg, fill = category_f))+
-  geom_histogram(binwidth = 200, col = "black")+
-  labs(x='Price of Margarita Pizza', y='Number of Pizzas', title = "Distribution of Price for On-site", fill= 'category')+
-  facet_wrap(~category_f)
+ggplot(data = dp, aes(x = price_marg, fill = category_f, alpha = 0.2))+
+  geom_density(binwidth = 200, col = "black")+
+  labs(x='Price of Margarita Pizza (HUF)', y='Number of Pizzas', title = "Distribution of Price for On-site and Delivery", fill= 'category')
+
 ```
+In order to avoid confusion on the analysis between On-site and Delivery, we took out the beverage and just analyse the margarita price. (Due to the beverages not being uniform)
 
 # T-test
 ## Hypothesis
