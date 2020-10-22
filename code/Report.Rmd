@@ -104,11 +104,12 @@ ggplot(data = dp, aes(x = price_marg, fill = category_f))+
 Null mean(on-site)=mean(delivery)
 Alternative mean(on-site) not = mean(delivery)
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, results='asis'}
+#install.packages('pander')
 price_offline <- dp$price_marg[dp$category=="On-site"]
 price_online <- dp$price_marg[dp$category=="Delivery"]
-
-t.test(price_offline,price_online, alternative = "two.sided")
+library(pander)
+pander(t.test(price_offline,price_online, alternative = "two.sided"))
 ```
 
 # Summary and Conclusion
