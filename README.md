@@ -30,4 +30,6 @@ As far as 0.5l beverages are considered, we opted for any 0.5l soda drink that w
 | no_pizza | Number of pizzas offered by catering unit |
 | price_marg | Price of one margherita pizza at catering unit  |
 | price_bev | Price of one 0.5l  beverage at catering unit  |
+| type_bev | type of drink of one 0.5l |
+| category_bev | category of drink of one 0.5l |
 | price_del | Price of delivery to CEU campus (Budapest, Nádor u. 15, 1051) |
