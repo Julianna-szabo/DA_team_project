@@ -3,7 +3,7 @@ title: "Report"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE, warning = FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 defaultW <- getOption("warn") 
 options(warn = -1)
@@ -50,6 +50,7 @@ dp$open_mins=mapply(get_interval, dp$open, dp$close)
 
 ```{r, eval=TRUE, echo=FALSE, results='asis'}
 dp_summary_stats_pizza <- summarise(dp,
+          variable = "Price of Pizza",
           n= n(),
           mean = mean(x = price_marg),
           median = median(x = price_marg),
@@ -58,6 +59,7 @@ dp_summary_stats_pizza <- summarise(dp,
           sd = sd(price_marg),
           skew = skewness(price_marg))
 dp_summary_stats_bev <- summarise(dp,
+          variable = "Price of Beverage",
           n= n(),
           mean = mean(x = price_bev),
           median = median(x = price_bev),
@@ -66,10 +68,7 @@ dp_summary_stats_bev <- summarise(dp,
           sd = sd(price_bev),
           skew = skewness(price_bev))
 
-table_summary <- dp_summary_stats_pizza %>% 
-  add_row(dp_summary_stats_bev) %>% 
-  add_column(c('Product','Pizza Marg.','Beverage (0.5l)'))
-kable(table_summary)
+table_summary <- add_row(dp_summary_stats_bev,dp_summary_stats_bev)
 ```
 
 # Distributions
@@ -92,14 +91,15 @@ dp %>%
 
 ## Price distribution on-site vs delivery
 
-```{r, echo=FALSE, out.width="70%"}
+```{r, echo=FALSE, fig1, fig.height = 1.7, fig.width = 7}
 dp$category_f <- factor(dp$category)
 
 ggplot(data = dp, aes(x = price_marg, fill = category_f, alpha = 0.2))+
-  geom_density(binwidth = 200, col = "black")+
+  geom_density()+
   labs(x='Price of Margarita Pizza (HUF)', y='Number of Pizzas', title = "Distribution of Price for On-site and Delivery", fill= 'category')
 
 ```
+
 In order to avoid confusion on the analysis between On-site and Delivery, we took out the beverage and just analyse the margarita price. (Due to the beverages not being uniform)
 
 # T-test
@@ -112,7 +112,6 @@ $$H_{1}: \bar{p_{o}}\neq\bar{p_{d}}$$
 
 ```{r, echo=FALSE, results='asis', message=FALSE}
 #install.packages('pander')
-
 price_onsite <- dp$price_marg[dp$category=="On-site"]
 price_delivery <- dp$price_marg[dp$category=="Delivery"]
 library(pander)
