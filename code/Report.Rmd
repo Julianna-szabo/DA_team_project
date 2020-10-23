@@ -3,8 +3,10 @@ title: "Report"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+defaultW <- getOption("warn") 
+options(warn = -1)
 ```
 
 ```{r, include=F, message=FALSE, echo=FALSE, eval=TRUE}
@@ -14,15 +16,12 @@ library(moments)
 library(dplyr)
 library(knitr)
 ## Github Repo of Assignment: https://github.com/Julianna-szabo/DA_team_project
-# Import data using paths
-#setwd("C:/Users/Dominik/OneDrive - Central European University/1st_trimester/DA1/DA_team_project")
-#esource="C:/Users/Dominik/OneDrive - Central European University/1st_trimester/DA1/DA_team_project"
-# Import via URL
+# Import data via URL
 my_url <- "https://raw.githubusercontent.com/Julianna-szabo/DA_team_project/master/data/raw/dp.csv"
 dp <- read_csv(my_url)
 ```
-author: "Group B"
-date: "21/10/2020"
+Authors: Group B,
+Date: 21/10/2020
 
 # Data collection
 
@@ -67,7 +66,9 @@ dp_summary_stats_bev <- summarise(dp,
           sd = sd(price_bev),
           skew = skewness(price_bev))
 
-table_summary <- dp_summary_stats_pizza %>% add_row(dp_summary_stats_bev)
+table_summary <- dp_summary_stats_pizza %>% 
+  add_row(dp_summary_stats_bev) %>% 
+  add_column(c('Product','Pizza Marg.','Beverage (0.5l)'))
 kable(table_summary)
 ```
 
@@ -103,15 +104,19 @@ In order to avoid confusion on the analysis between On-site and Delivery, we too
 
 # T-test
 ## Hypothesis
-Null mean(on-site)=mean(delivery)
-Alternative mean(on-site) not = mean(delivery)
+$$H_{0}: \bar{p_{o}}=\bar{p_{d}}$$
+$$H_{1}: \bar{p_{o}}\neq\bar{p_{d}}$$
 
-```{r, echo=FALSE, results='asis'}
+<!-- Null mean(on-site)=mean(delivery) -->
+<!-- Alternative mean(on-site) not = mean(delivery) -->
+
+```{r, echo=FALSE, results='asis', message=FALSE}
 #install.packages('pander')
-price_offline <- dp$price_marg[dp$category=="On-site"]
-price_online <- dp$price_marg[dp$category=="Delivery"]
+
+price_onsite <- dp$price_marg[dp$category=="On-site"]
+price_delivery <- dp$price_marg[dp$category=="Delivery"]
 library(pander)
-pander(t.test(price_offline,price_online, alternative = "two.sided"))
+pander(t.test(price_onsite,price_delivery, alternative = "two.sided"),conf.int =TRUE)
 ```
 
 # Summary and Conclusion
