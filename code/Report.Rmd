@@ -100,6 +100,18 @@ ggplot(data = dp, aes(x = price_marg, fill = category_f, alpha = 0.2))+
 
 ```
 
+```{r,include=FALSE, echo=FALSE}
+ggplot(dp, aes(x=dist_ceu, y=price_marg, color=category)) +
+  geom_point(size=2) +
+  labs(x='Distance from CEU', y='Price of Margarita Pizza (HUF)', title = "Relationship between price and distance from CEU Campus")
+```
+```{r, include=FALSE, echo=FALSE}
+dp_del<-dp[dp$price_del!='N/A',]
+ggplot(dp_del, aes(x=dist_ceu, y=price_del)) +
+  geom_point(size=2) +
+  labs(x='Distance from CEU', y='Price of Margarita Pizza (HUF)', title = "Relationship between price and distance from CEU Campus")
+```
+
 In order to avoid confusion on the analysis between On-site and Delivery, we took out the beverage and just analyse the margarita price. (Due to the beverages not being uniform)
 
 # T-test
