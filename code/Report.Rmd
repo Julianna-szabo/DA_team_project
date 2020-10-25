@@ -13,11 +13,13 @@ options(warn = -1)
 ```
 
 ```{r, include=F, message=FALSE, echo=FALSE, eval=TRUE}
+#install.packages('pander')
 library(tidyverse)
 library(geosphere)
 library(moments)
 library(dplyr)
 library(knitr)
+library(pander)
 ## Github Repo of Assignment: https://github.com/Julianna-szabo/DA_team_project
 # Import data via URL
 my_url <- "https://raw.githubusercontent.com/Julianna-szabo/DA_team_project/master/data/raw/dp.csv"
@@ -80,7 +82,7 @@ dp %>%
   geom_histogram(binwidth = 50, col= "black")+
   theme_bw()+
   scale_fill_brewer()+
-  labs(x = 'Price of 0.5L beverage (HUF)', y= 'Number of Pizzas', title = "Distribution of Price for Beverage by category")
+  labs(x = 'Price of 0.5L beverage (HUF)', y= 'Number of Beverages', title = "Distribution of Price for Beverage by category")
 ```
 
 ## Price distribution on-site vs delivery and relationship between delivery price and distance from CEU Campus
@@ -92,14 +94,14 @@ dp$category_f <- factor(dp$category)
 
 ggplot(data = dp, aes(x = price_marg, fill = category_f))+
   geom_density(aes(y=..count../sum(..count..)*100), alpha = 0.6)+
-  labs(x='Price of Margarita Pizza (HUF)', y='Distribution of Pizzas (%)', title = "Distribution of Price for On-site and Delivery", fill= 'category')
+  labs(x='Price of Margarita Pizza (HUF)', y='Frequency (%)', title = "Distribution of Price for On-site and Delivery", fill= 'category')
 
 dp_del <- dp[dp$price_del!='N/A',] %>% 
   transform(price_del = as.numeric(price_del))
 corr=round(cor(dp_del$dist_ceu, dp_del$price_del, method = c("pearson")),4)
 ggplot(dp_del, aes(x=dist_ceu, y=price_del)) +
   geom_point(size=3, color='orange') +
-  labs(x='Distance from CEU', y='Delivery price', title = expr(paste("Relationship between delivery price and distance from CEU, ", rho, "=",!!corr)))
+  labs(x='Distance from CEU (m)', y='Delivery price (HUF)', title = expr(paste("Relationship Between Delivery Price and Distance From CEU, ", rho, "=",!!corr)))
 
 ```
 
@@ -109,11 +111,9 @@ $$H_{0}: \bar{p_{o}}=\bar{p_{d}}$$
 $$H_{1}: \bar{p_{o}}\neq\bar{p_{d}}$$
 
 ```{r, echo=FALSE, results='asis', message=FALSE}
-#install.packages('pander')
 price_onsite <- dp$price_marg[dp$category=="On-site"]
 price_delivery <- dp$price_marg[dp$category=="Delivery"]
-library(pander)
-pander(t.test(price_onsite,price_delivery, alternative = "two.sided"),conf.int =TRUE)
+pander(t.test(price_onsite,price_delivery, alternative = "two.sided"),conf.int =0.95)
 ```
 
 # Summary and Conclusion
