@@ -61,7 +61,7 @@ dp_summary_stats_bev <- summarise(dp,
           sd = sd(price_bev),
           skew = skewness(price_bev))
 
-table_summary <- add_row(dp_summary_stats_bev,dp_summary_stats_bev)
+table_summary <- add_row(dp_summary_stats_pizza,dp_summary_stats_bev)
 kable(table_summary)
 ```
 
