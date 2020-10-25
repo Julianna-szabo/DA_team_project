@@ -90,9 +90,9 @@ In order to have a comparable base for online and offline prices, we decided to 
 ```{r, echo=FALSE, dodge-st, fig.show = "hold", out.width = "50%"}
 dp$category_f <- factor(dp$category)
 
-ggplot(data = dp, aes(x = price_marg, fill = category_f, alpha = 0.2))+
-  geom_density()+
-  labs(x='Price of Margarita Pizza (HUF)', y='Number of Pizzas', title = "Distribution of Price for On-site and Delivery", fill= 'category')
+ggplot(data = dp, aes(x = price_marg, fill = category_f))+
+  geom_density(aes(y=..count../sum(..count..)*100), alpha = 0.6)+
+  labs(x='Price of Margarita Pizza (HUF)', y='Distribution of Pizzas (%)', title = "Distribution of Price for On-site and Delivery", fill= 'category')
 
 dp_del <- dp[dp$price_del!='N/A',] %>% 
   transform(price_del = as.numeric(price_del))
