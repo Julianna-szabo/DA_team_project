@@ -62,6 +62,7 @@ dp_summary_stats_bev <- summarise(dp,
           skew = skewness(price_bev))
 
 table_summary <- add_row(dp_summary_stats_bev,dp_summary_stats_bev)
+kable(table_summary)
 ```
 
 # Distributions
