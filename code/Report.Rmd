@@ -1,6 +1,9 @@
 ---
 title: "Report"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -25,25 +28,15 @@ Date: 21/10/2020
 
 # Data collection
 
-The data collection process was more difficult than expected. Most of the time coca cola in 0,5l was not available, instead of putting a NA we choose an alternative in 0,5l, Pepsi or lemonade. If those were not available, we took water or beer even though beer is usually more expensive. We decided to sort them in three categories : soft( Coca, Pepsi, Lemonade), water and beer. For the extra measures we recorded, numbers of pizzas they offered, opening hours (which we converted into minutes opened in this analysis and took the usual opening hours), as well as rating on Google and the number of ratings they received. The number of ratings is important since it gives the rating more credibility. We also recorded the longitude and latitude to calculate the distance from CEU and estimate the fairness of the delivery compare to the distance to CEU.
+The data collection process was more difficult than expected. Most of the time Coca-Cola in 0.5l was not available, instead of putting an NA we choose an alternative in 0,5l, Pepsi or lemonade. If those were not available, we took water or beer even though beer is usually more expensive. We decided to sort them in three categories : soft( Coca, Pepsi, Lemonade), water and beer. For the extra measures we recorded, numbers of pizzas they offered, opening hours (which we converted into minutes opened in this analysis and took the usual opening hours), as well as rating on Google and the number of ratings they received. The number of ratings is important since it gives the rating more credibility. We also recorded the longitude and latitude to calculate the distance from CEU and estimate the fairness of the delivery compare to the distance to CEU.
 
 
 ```{r, echo=FALSE, eval=TRUE, include=FALSE}
-# Calculations for opening hours and distance from CEU
+# Calculations for distance from CEU
 ceu = c(47.501348, 19.049375)
 dp["dist_ceu"] = distm(data.matrix(dp[6:7]), ceu, fun = distHaversine)
 distm(ceu, c(47.500386, 19.049434), fun=distHaversine)
 
-get_interval <- function(open,close){
-  intv = close-open
-  if (intv < 0) {
-    intv = as.difftime("24:00:00")-open+close
-  }
-  intv=as.numeric(as.difftime(intv,units = "hours"))/60
-  return(intv)
-}
-
-dp$open_mins=mapply(get_interval, dp$open, dp$close)
 ```
 
 # Descriptive Statistics
@@ -89,38 +82,29 @@ dp %>%
   labs(x = 'Price of 0.5L beverage (HUF)', y= 'Number of Pizzas', title = "Distribution of Price for Beverage by category")
 ```
 
-## Price distribution on-site vs delivery
+## Price distribution on-site vs delivery and relationship between delivery price and distance from CEU Campus
 
-```{r, echo=FALSE, fig1, fig.height = 1.7, fig.width = 7}
+```{r, echo=FALSE, dodge-st, fig.show = "hold", out.width = "50%"}
 dp$category_f <- factor(dp$category)
 
 ggplot(data = dp, aes(x = price_marg, fill = category_f, alpha = 0.2))+
   geom_density()+
   labs(x='Price of Margarita Pizza (HUF)', y='Number of Pizzas', title = "Distribution of Price for On-site and Delivery", fill= 'category')
 
-```
-
-```{r,include=FALSE, echo=FALSE}
-ggplot(dp, aes(x=dist_ceu, y=price_marg, color=category)) +
-  geom_point(size=2) +
-  labs(x='Distance from CEU', y='Price of Margarita Pizza (HUF)', title = "Relationship between price and distance from CEU Campus")
-```
-```{r, include=FALSE, echo=FALSE}
-dp_del<-dp[dp$price_del!='N/A',]
+dp_del <- dp[dp$price_del!='N/A',] %>% 
+  transform(price_del = as.numeric(price_del))
+corr=round(cor(dp_del$dist_ceu, dp_del$price_del, method = c("pearson")),4)
 ggplot(dp_del, aes(x=dist_ceu, y=price_del)) +
-  geom_point(size=2) +
-  labs(x='Distance from CEU', y='Price of Margarita Pizza (HUF)', title = "Relationship between price and distance from CEU Campus")
-```
+  geom_point(size=3, color='orange') +
+  labs(x='Distance from CEU', y='Delivery price', title = expr(paste("Relationship between delivery price and distance from CEU Campus, ", rho, "=",!!corr)))
 
-In order to avoid confusion on the analysis between On-site and Delivery, we took out the beverage and just analyse the margarita price. (Due to the beverages not being uniform)
+```
+In order to avoid confusion on the analysis between On-site and Delivery, we took out the beverage and just analyse the margharita price. (Due to the beverages not being uniform)
 
 # T-test
 ## Hypothesis
 $$H_{0}: \bar{p_{o}}=\bar{p_{d}}$$
 $$H_{1}: \bar{p_{o}}\neq\bar{p_{d}}$$
-
-<!-- Null mean(on-site)=mean(delivery) -->
-<!-- Alternative mean(on-site) not = mean(delivery) -->
 
 ```{r, echo=FALSE, results='asis', message=FALSE}
 #install.packages('pander')
@@ -132,4 +116,4 @@ pander(t.test(price_onsite,price_delivery, alternative = "two.sided"),conf.int =
 
 # Summary and Conclusion
 
-Overall the distribution of price of the beverages has a larger range than the prices of the pizza. And overall the prices of the pizzas on-site were more expensive then the ones for delivery, although with the delivery fee this may be evened out. The t-test also comes to the same conclusion where 
+Overall the distribution of beverage prices is more spread out than the distribution of pizza prices. However, there is also an extreme value for pizza prices with a value of 4000 Ft while most prices are around 2000 Ft. Considering on-site vs delivery order price differences on-site consumption seems more expensive than ordering for delivery, although with delivery fees this may be change. The average pizza price for on-site consumption is 2033 Ft while for delivery it is 1800. However, based on the t-test we may come to the conclusion that this price difference is statistically insignificant using a 5% significance level. We also looked at the relationship between delivery price and distance from CEU Campus to see if prices increase with distance, but it seems like there is no such pattern since the correlation coefficient is close to zero.
