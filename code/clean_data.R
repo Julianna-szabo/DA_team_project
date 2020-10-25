@@ -64,11 +64,11 @@ dp_summary_stats_bev <- summarise(dp,
           sd = sd(price_bev),
           skew = skewness(price_bev))
 
-# Join the to table
+# Join them to table
 table_summary <- add_row(dp_summary_stats_bev,dp_summary_stats_bev)
 
 
-## Data Visulization: part 1
+## Data Visualization: part 1
 # Histogram : descriptive graph of price distribution of the Margarita
 dp %>% 
   ggplot(aes(x=price_marg))+

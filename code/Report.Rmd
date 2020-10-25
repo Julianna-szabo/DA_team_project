@@ -85,6 +85,8 @@ dp %>%
 
 ## Price distribution on-site vs delivery and relationship between delivery price and distance from CEU Campus
 
+In order to have a comparable base for online and offline prices, we decided to only look at the price for the pizza and discard the beverage price, which they were not always comparable.
+
 ```{r, echo=FALSE, dodge-st, fig.show = "hold", out.width = "50%"}
 dp$category_f <- factor(dp$category)
 
@@ -100,7 +102,6 @@ ggplot(dp_del, aes(x=dist_ceu, y=price_del)) +
   labs(x='Distance from CEU', y='Delivery price', title = expr(paste("Relationship between delivery price and distance from CEU Campus, ", rho, "=",!!corr)))
 
 ```
-In order to avoid confusion on the analysis between On-site and Delivery, we took out the beverage and just analyse the margharita price. (Due to the beverages not being uniform)
 
 # T-test
 ## Hypothesis
